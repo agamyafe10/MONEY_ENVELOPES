@@ -1,4 +1,5 @@
 from envelope import Envelope
+import random
 
 
 class BaseStrategy(Envelope):
@@ -67,6 +68,51 @@ class More_then_N_percent_group_strategy(Envelope):
                 break
 
         return max_envelope
+
+class Automatic_BaseStrategy(Envelope):
+    def __init__(self, env_arr):
+        """constructor"""
+        self.env_arr = env_arr# the envelopes list
+    def play(self):
+        """
+
+        :return: the random envelope by the number the user has entered
+        """
+        return self.env_arr[random.randrang(0,100)]
+
+class More_then_N_percent_group_strategy(Envelope):
+    def __init__(self,env_arr):
+        """constructor"""
+        self.env_arr = env_arr  # the envelopes list
+
+    def play(self, precent_num):
+        """
+
+        :param precent_num: the precent of envelopes that will open automatically
+        :return:
+        """
+        envelopes_to_open = precent_num * 100#find the amount of envelopes to open
+        max_money = 0#the max amount of money, now 0
+        open_count = 0#find how many envelopes were opened
+
+        for envelope in self.env_arr:
+            if open_count < envelopes_to_open:#if the precent of envelopes the user asked to open first were'nt open already
+                envelope.used = True#submit it was open
+                if envelope.money > max_money:
+                    max_money = envelope.money#update the max money sum
+            else:#if the precent of envelopes the user asked to open first were open already
+                envelope.used = True#submit it was open
+                if envelope.money > max_money:#if we found the one with more money then the max one
+                    return envelope
+            if open_count == 100:# if he didnt found an envelope with more money, the last one has to be returned
+                return envelope
+            open_count+=1#updating the number of envelopes that were opened
+
+
+
+
+
+
 
 
 
