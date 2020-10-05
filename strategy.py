@@ -29,3 +29,45 @@ class BaseStrategy(Envelope):
             if count == 100:# if it is the last envelope
                 envelope.used = True# change the used statement so the envelope will not be used again
                 return envelope# return the amount of money which is in the envelope
+
+
+class More_then_N_percent_group_strategy(Envelope):
+    def init(self, env_arr):
+        """constructor"""
+        self.env_arr = env_arr# the envelopes list
+
+    def play(self, N_of_maxes=3):
+        """
+        function that finds the envelope with the biggest amount of money by replacing the current max envelope since
+        the start of the list n times
+        :param N_of_maxes: how much times will the max will be replaced since the strategy has started running
+        :return: the envelope with biggest amount of money after n times of replacing the max
+        """
+
+        # the biggest amount found - for start 0
+        max_sum_of_money = 0
+        # the envelope with the biggest amount of money that was found - just for start random envelope for sure will be
+        # replaced
+        max_envelope = Envelope()
+        # the number of times that the max had changed - for start 0
+        times_max_was_changed = 0
+
+        for envelope in self.env_arr:
+
+            if times_max_was_changed < N_of_maxes:
+                # checking if there is a new maximum since last one
+                if envelope.money > max_sum_of_money:
+                    max_sum_of_money = envelope.money
+                    max_envelope = envelope
+                    # one more maximum added - getting closer to N times maximum needs to change to stop
+                    times_max_was_changed += 1
+            # if the n of times to change max reached stop the loop - if that never happens and loop ends last maximum
+            # will be returned
+            else:
+                break
+
+        return max_envelope
+
+
+
+
