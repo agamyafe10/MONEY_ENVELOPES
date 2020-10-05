@@ -59,7 +59,7 @@ class N_max_strategy(Envelope):
                 # checking if there is a new maximum since last one
                 if envelope.money > max_sum_of_money:
                     # checking if the envelope was not opened
-                    if envelope.used == False:
+                    if not envelope.used:
                         envelope.used = True
                         max_sum_of_money = envelope.money
                         max_envelope = envelope
@@ -76,40 +76,42 @@ class Automatic_BaseStrategy(Envelope):
     def __init__(self, env_arr):
         """constructor"""
         self.env_arr = env_arr# the envelopes list
+
     def play(self):
         """
 
         :return: the random envelope by the number the user has entered
         """
-        return self.env_arr[random.randrang(0,100)]
+        return self.env_arr[random.randrang(0, 100)]
+
 
 class More_then_N_percent_group_strategy(Envelope):
-    def __init__(self,env_arr):
+    def __init__(self, env_arr):
         """constructor"""
         self.env_arr = env_arr  # the envelopes list
 
-    def play(self, precent_num):
+    def play(self, percent_num):
         """
 
-        :param precent_num: the precent of envelopes that will open automatically
-        :return:
+        :param percent_num: the precent of envelopes that will open automatically
+        :return: envelope object
         """
-        envelopes_to_open = precent_num * 100#find the amount of envelopes to open
-        max_money = 0#the max amount of money, now 0
-        open_count = 0#find how many envelopes were opened
+        envelopes_to_open = percent_num * 100# find the amount of envelopes to open
+        max_money = 0# the max amount of money, now 0
+        open_count = 0# find how many envelopes were opened
 
         for envelope in self.env_arr:
-            if open_count < envelopes_to_open:#if the precent of envelopes the user asked to open first were'nt open already
-                envelope.used = True#submit it was open
+            if open_count < envelopes_to_open:# if the percent of envelopes the user asked to open first were'nt open already
+                envelope.used = True# submit it was open
                 if envelope.money > max_money:
-                    max_money = envelope.money#update the max money sum
-            else:#if the precent of envelopes the user asked to open first were open already
-                envelope.used = True#submit it was open
-                if envelope.money > max_money:#if we found the one with more money then the max one
+                    max_money = envelope.money# update the max money sum
+            else:# if the percent of envelopes the user asked to open first were open already
+                envelope.used = True# submit it was open
+                if envelope.money > max_money:# if we found the one with more money then the max one
                     return envelope
-            if open_count == 100:# if he didnt found an envelope with more money, the last one has to be returned
+            if open_count == 100:# if he didn't found an envelope with more money, the last one has to be returned
                 return envelope
-            open_count+=1#updating the number of envelopes that were opened
+            open_count += 1# updating the number of envelopes that were opened
 
 
 
