@@ -16,7 +16,6 @@ class BaseStrategy(Envelope):
         :param: self
         :returns: the envelope the client has chosen
         """
-        found = 1# used to know if the user has chosen an envelope
         count = 0# used to know if it is the last envelope
         for envelope in self.env_arr:
             count += 1# to know if it is the last envelope
@@ -82,7 +81,7 @@ class Automatic_BaseStrategy(Envelope):
 
         :return: the random envelope by the number the user has entered
         """
-        return self.env_arr[random.randrang(0, 100)]
+        return self.env_arr[random.randrange(0, 100)]
 
 
 class More_then_N_percent_group_strategy(Envelope):
@@ -101,7 +100,7 @@ class More_then_N_percent_group_strategy(Envelope):
         open_count = 0# find how many envelopes were opened
 
         for envelope in self.env_arr:
-            if open_count < envelopes_to_open:# if the percent of envelopes the user asked to open first were'nt open already
+            if open_count < envelopes_to_open:# if the percent of envelopes the user asked to open first weren't open already
                 envelope.used = True# submit it was open
                 if envelope.money > max_money:
                     max_money = envelope.money# update the max money sum
