@@ -32,7 +32,7 @@ class BaseStrategy(Envelope):
                 return envelope# return the amount of money which is in the envelope
 
 
-class More_then_N_percent_group_strategy(Envelope):
+class N_max_strategy(Envelope):
     def init(self, env_arr):
         """constructor"""
         self.env_arr = env_arr# the envelopes list
