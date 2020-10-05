@@ -58,10 +58,13 @@ class More_then_N_percent_group_strategy(Envelope):
             if times_max_was_changed < N_of_maxes:
                 # checking if there is a new maximum since last one
                 if envelope.money > max_sum_of_money:
-                    max_sum_of_money = envelope.money
-                    max_envelope = envelope
-                    # one more maximum added - getting closer to N times maximum needs to change to stop
-                    times_max_was_changed += 1
+                    # checking if the envelope was not opened
+                    if envelope.used == False:
+                        envelope.used = True
+                        max_sum_of_money = envelope.money
+                        max_envelope = envelope
+                        # one more maximum added - getting closer to N times maximum needs to change to stop
+                        times_max_was_changed += 1
             # if the n of times to change max reached stop the loop - if that never happens and loop ends last maximum
             # will be returned
             else:
