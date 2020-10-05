@@ -1,5 +1,8 @@
+import random
+
+
 class Envelope:
-    def __init__(self, money):
+    def __init__(self, money=random.randrange(1, 101)):
         """constructor"""
         self.money = money
         self.used = False
@@ -30,3 +33,8 @@ class Envelope:
     def display(self):
         """returns the object's properties in a format string"""
         return f'amount: {self.money}, used: {self.used}'
+
+    @staticmethod
+    def play(self):
+        """a function meant to be override by the strategies classes"""
+        print("an envelope can not be played by it self")
