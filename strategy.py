@@ -3,11 +3,18 @@ from envelope import Envelope
 
 class BaseStrategy(Envelope):
     def __init__(self, env_arr):
-        """constructor"""
+        """
+        constructor: new envelope
+        :param env_arr: envelopes' list
+        """
         self.env_arr = env_arr# the envelopes list
 
     def play(self):
-        """passes one by one on the envelopes list until the clients chooses an envelope, return the sum of money which was in the envelope"""
+        """
+        passes one by one on the envelopes list until the clients chooses an envelope, return the sum of money which was in the envelope
+        :param: self
+        :returns: the envelope the client has chosen
+        """
         found = 1# used to know if the user has chosen an envelope
         count = 0# used to know if it is the last envelope
         for envelope in self.env_arr:
