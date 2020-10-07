@@ -31,7 +31,6 @@ while n != 4:
             strategies[n].percent = p
         if n != 4:
             x = strategies[n].play()
-            print(x)
         x = input('press any key to continue')
     else:
         pass

@@ -3,6 +3,10 @@ import random
 
 
 class BaseStrategy(Envelope):
+    """
+    creator: agam yafe
+    first strategy- passes one by one
+    """
     def __init__(self, env_arr):
         """
         constructor: new envelope
@@ -17,37 +21,33 @@ class BaseStrategy(Envelope):
         :returns: the envelope the client has chosen
         """
         count = 0# used to know if it is the last envelope
-        last_envelope_not_used = 99# the index of the last envelope
-        for i in range(99, -1, -1):# check for the last envelope which was not opened
+        last_envelope_not_used = len(self.env_arr)-1# the index of the last envelope
+        for i in range(last_envelope_not_used, -1, -1):# check for the last envelope which was not opened
             if not self.env_arr[i].used:# if the envelope was not opened save the index
                 last_envelope_not_used = i
                 break
-            if i == 0:# if we have reached the first envelope was used too
+            if i == 0:# if we have reached the first envelope and it was used too
                 print("all the envelopes have been opened")
-                return# quit the function
+                return# quit the function we do not have any envelopes to ork with
         for envelope in self.env_arr:
             count += 1# to know if it is the last envelope
-            if envelope.used:#
-                continue
-            else:
-                print(envelope)# display the user the envelope's details
+            if envelope.used:# if the envelope was already opened
+                continue# skip to the next envelope
+            print(envelope)# display the user the envelope's details
+            envelope.used = True  # change the used statement so the envelope will not be used again
             found = input("enter the digit 1 if you have chosen the current envelope else: press any other key ")
             if found == '1':# if the client has chosen the current envelope and it hasn't been used yet
-                envelope.used = True# change the used statement so the envelope will not be used again
                 return envelope# return the amount of money which is in the envelope
-            if count == last_envelope_not_used+1:# if it is the last envelope
-                if not envelope.used:# if the last one was not opened
-                    envelope.used = True# change the used statement so the envelope will not be used again
-                    return envelope# return the amount of money which is in the envelope
-                # else:# if the last one was opened
-                #     for i in range(98, -1, -1):# runs on the env_list to find the nearest one that was not open
-                #         if not self.env_arr[i].used:
-                #             envelope.used = True
-                #             return envelope
-            envelope.used = True  # change the used statement so the envelope will not be used again
+            if count == last_envelope_not_used+1:# if it is the last envelope which is not opened yet
+                print("this was the last envelope which was not opened")
+                return envelope# return the amount of money which is in the envelope
 
 
 class N_max_strategy(Envelope):
+    """
+    creator: ariel chitiat
+    passes over the envelope and changes N times the last max value that was found
+    """
     def __init__(self, env_arr):
         """constructor"""
         self.env_arr = env_arr# the envelopes list
@@ -107,6 +107,10 @@ class N_max_strategy(Envelope):
 
 
 class Automatic_BaseStrategy(Envelope):
+    """
+    creator: yoav levin
+    returns a random envelope
+    """
     def __init__(self, env_arr):
         """constructor"""
         self.env_arr = env_arr# the envelopes list
@@ -123,6 +127,10 @@ class Automatic_BaseStrategy(Envelope):
 
 
 class More_then_N_percent_group_strategy(Envelope):
+    """
+    creator: yoav levin
+    finding the maximum value in the part the client inserted, and pass over the rest envelopes, if there is a better envelope
+    """
     def __init__(self, env_arr):
         """constructor"""
         self.env_arr = env_arr  # the envelopes list
@@ -167,13 +175,3 @@ class More_then_N_percent_group_strategy(Envelope):
                     return envelope
             if open_count == 100:# if he didn't found an envelope with more money, the last one has to be returned
                 return envelope
-
-
-
-
-
-
-
-
-
-
