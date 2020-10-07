@@ -2,6 +2,9 @@ import random
 
 
 class Envelope:
+    """
+    creator: agam yafe
+    """
     def __init__(self):
         """
         constructor
