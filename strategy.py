@@ -87,16 +87,15 @@ class N_max_strategy(Envelope):
         times_max_was_changed = 0
 
         for envelope in self.env_arr:
-
             if times_max_was_changed < self.N:
-                # checking if there is a new maximum since last one
-                if envelope.money > max_sum_of_money:
-                    # checking if the envelope was not opened
-                    if not envelope.used:
-                        envelope.used = True
+                # checking if the envelope was not opened
+                if not envelope.used:
+                    envelope.used = True
+                    # checking if there is a new maximum since last one
+                    if envelope.money > max_sum_of_money:
                         max_sum_of_money = envelope.money
                         max_envelope = envelope
-                        # one more maximum added - getting closer to N times maximum needs to change to stop
+                        # one more maximum changed - getting closer to N times maximum needs to change to stop
                         times_max_was_changed += 1
             # if the n of times to change max reached stop the loop - if that never happens and loop ends last maximum
             # will be returned
