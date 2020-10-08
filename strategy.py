@@ -120,7 +120,12 @@ class Automatic_BaseStrategy(Envelope):
         :param: self
         :return: a random envelope
         """
+
         x = random.randrange(0, 100)# the random index of an envelope
+
+        while self.env_arr[x].used:
+            x = random.randrange(0, 100)# the random index of an envelope
+
         self.env_arr[x].used = True# change the used statement so the envelope will not be used again
         return self.env_arr[x]
 
