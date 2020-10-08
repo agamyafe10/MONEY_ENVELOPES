@@ -60,7 +60,7 @@ class Envelope:
         :param: self
         :returns: a formatted string: a string
         """
-        return cls
+        return f' strategy: {cls.__name__}'
 
     @staticmethod
     def play(self):
