@@ -56,8 +56,8 @@ class Envelope:
     @classmethod
     def display(cls):
         """
-        returns the object's properties in a format string
-        :param: self
+        returns the name of the class
+        :param: class
         :returns: a formatted string: a string
         """
         return f' strategy: {cls.__name__}'
